@@ -1,11 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Odin Todo List</title>
 </head>
+
 <body>
-  
+  <div class="container">
+    <div class="sidebar">
+      <div class="name">
+        <div class="icon">
+          <img src="./images/todo-list.svg" width="48px" />
+        </div>
+        <div class="title">Todo List</div>
+      </div>
+      <div class="menu">
+        <button class="menu-btn" type="button">Add Task</button>
+        <button class="menu-btn" type="button">Add Project</button>
+      </div>
+      <div class="projects">
+        <div class="icon">
+          <img src="./images/folder-pound.svg" width="42px" />
+        </div>
+        <div class="title">My Projects</div>
+      </div>
+      <div class="project">
+        <button class="project-btn" type="button">Default</button>
+        <button class="project-btn" type="button">New Project</button>
+      </div>
+    </div>
+    <div class="main">
+      <div class="title">Default</div>
+      <div class="todos">
+        <div class="todo">
+          <button class="circle-btn" autofocus>
+            <img class="circle" src="./images/circle-outline.svg" width="26px" />
+          </button>
+          <div class="title">This is the first task to be done.</div>
+          <button class="edit-btn" autofocus>
+            <img class="pencil" src="./images/pencil.svg" width="26px" />
+          </button>
+          <button class="delete-btn" autofocus>
+            <img class="close" src="./images/close-thick.svg" width="26px" />
+          </button>
+        </div>
+        <div class="todo">
+          <button class="circle-btn" autofocus>
+            <img class="circle" src="./images/circle-outline.svg" width="26px" />
+          </button>
+          <div class="title">This is the second task.</div>
+          <button class="edit-btn" autofocus>
+            <img class="pencil" src="./images/pencil.svg" width="26px" />
+          </button>
+          <button class="delete-btn" autofocus>
+            <img class="close" src="./images/close-thick.svg" width="26px" />
+          </button>
+        </div>
+      </div>
+      <!--
+      <div class="apple">
+        <input type="checkbox" id="apple" name="fruit" value="apple">
+        <label for="apple">This is the first task to be done.</label>
+      </div>
+      <div class="banana">
+        <input type="checkbox" id="banana" name="fruit" value="banana">
+        <label for="banana">This is the second task.</label>
+      </div>
+      -->
+    </div>
+  </div>
 </body>
+
 </html>
