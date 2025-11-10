@@ -4,7 +4,7 @@
   padding: 0;
 }
 
-.container {
+.content {
   display: grid;
   grid-template-columns: 1fr 3.75fr;
   gap: 0px;
@@ -47,7 +47,7 @@
   margin-bottom: 52px;
 }
 
-.menu-btn {
+.add-todo, .add-project {
   grid-column: 1 / span 2;
   background-color: transparent;
   background-image: url("./images/plus-circle.svg");
@@ -66,10 +66,8 @@
   transition: background-color 0.3s ease;
 }
 
-.menu-btn:hover {
+.add-todo:hover, .add-project:hover {
   background-color: #99ddee;
-  color: black;
-  filter: none;
 }
 
 .projects {
@@ -119,13 +117,11 @@
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
-
+/*
 .project-btn:hover {
   background-color: #99ddee;
-  color: black;
-  filter: none;
 }
-
+*/
 .main {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
