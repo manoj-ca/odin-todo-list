@@ -1,6 +1,6 @@
 import todoImg from "./images/todo-list.svg";
 import folderImg from "./images/folder-pound.svg";
-import { defaultproject } from "./project";
+import { projectmgr } from "./project";
 
 const content = document.querySelector(".content");
 const sidebar = document.createElement("div");
@@ -20,9 +20,8 @@ const projectsimg = document.createElement("img");
 const projectstitle = document.createElement("div");
 
 const project = document.createElement("div");
-const defaultproj = document.createElement("button");
 
-export const addName = ((sidebar) => {
+const addName = (() => {
   name.classList.add("name");
   sidebar.appendChild(name);
   nameicon.classList.add("icon");
@@ -35,7 +34,7 @@ export const addName = ((sidebar) => {
   name.appendChild(nametitle);
 });
 
-export const addMenu = ((sidebar) => {
+const addMenu = (() => {
   menu.classList.add("menu");
   sidebar.appendChild(menu);
   addtodo.classList.add("add-todo");
@@ -48,7 +47,7 @@ export const addMenu = ((sidebar) => {
   menu.appendChild(addproject);
 });
 
-export const addProjects = ((sidebar) => {
+const addProjects = (() => {
   projects.classList.add("projects");
   sidebar.appendChild(projects);
   projectsicon.classList.add("icon");
@@ -61,35 +60,36 @@ export const addProjects = ((sidebar) => {
   projects.appendChild(projectstitle);
 });
 
-export const addDefault = ((sidebar) => {
+const addProject = ((currproject) => {
+  const projectbtn = document.createElement("button");
   project.classList.add("project");
   sidebar.appendChild(project);
-  defaultproj.classList.add("project-btn");
-  defaultproj.type = "button";
-  defaultproj.textContent = "Default";
-  project.appendChild(defaultproj);
-  if (defaultproject.active) {
-    defaultproj.style.backgroundColor = '#99ff99';
+  projectbtn.classList.add("project-btn");
+  projectbtn.type = "button";
+  projectbtn.textContent = currproject.name;
+  project.appendChild(projectbtn);
+  if (currproject.active) {
+    projectbtn.style.backgroundColor = '#99ff99';
   }
+  projectbtn.addEventListener('mouseenter', () => {
+    if (!currproject.active) {
+      projectbtn.style.backgroundColor = '#99ddee';
+    }
+  });
+  projectbtn.addEventListener('mouseleave', () => {
+    if (!currproject.active) {
+      projectbtn.style.backgroundColor = 'transparent';
+    }
+  });
 });
 
 export const sidebarshow = (() => {
   sidebar.classList.add("sidebar");
   content.appendChild(sidebar);
-  addName(sidebar);
-  addMenu(sidebar);
-  addProjects(sidebar);
-  addDefault(sidebar);
-});
-
-defaultproj.addEventListener('mouseenter', () => {
-  if (!defaultproject.active) {
-    defaultproj.style.backgroundColor = '#99ddee';
-  }
-});
-
-defaultproj.addEventListener('mouseleave', () => {
-  if (!defaultproject.active) {
-    defaultproj.style.backgroundColor = 'transparent';
+  addName();
+  addMenu();
+  addProjects();
+  for (const currproject of projectmgr.projects) {
+    addProject(currproject);
   }
 });
