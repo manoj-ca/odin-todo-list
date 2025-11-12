@@ -9,59 +9,36 @@
 
 <body>
   <div class="content">
-<!--
-    <div class="sidebar">
-      <div class="name">
-        <div class="icon">
-          <img src="./images/todo-list.svg" width="48px" />
+    <dialog class="todo-dialog">
+      <button class="close" autofocus>
+        <img src="./images/close-thick.svg" width="48px" />
+      </button>
+      <form class="todo-form" action="example.com/path" method="post">
+        <div class="todo-input">
+          <div class="input">
+            <label class="label" for="title"><span>Title</span></label>
+            <input class="text" type="text" name="title" placeholder="Enter title . . ." required />
+          </div>
+          <div class="input">
+            <label class="label" for="description"><span>Description</span></label>
+            <textarea class="text" name="description" rows="5" cols="40" placeholder="Enter description . . ."></textarea>
+          </div>
+          <div class="input">
+            <label class="label" for="due-date"><span>Due Date</span></label>
+            <input class="text" type="date" name="due-date" placeholder="Due Date" />
+          </div>
+          <div class="input">
+            <label class="label" for="priority">Priority</label>
+            <select class="text" name="priority">
+              <option value=1>High</option>
+              <option value=2>Moderate</option>
+              <option value=3>Low</option>
+            </select>
+          </div>
         </div>
-        <div class="title">Todo List</div>
-      </div>
-      <div class="menu">
-        <button class="add-todo" type="button">Add Todo</button>
-        <button class="add-project" type="button">Add Project</button>
-      </div>
-      <div class="projects">
-        <div class="icon">
-          <img src="./images/folder-pound.svg" width="42px" />
-        </div>
-        <div class="title">My Projects</div>
-      </div>
-      <div class="project">
-        <button class="project-btn" type="button">Default</button>
-        <button class="project-btn" type="button">New Project</button>
-      </div>
-    </div>
-    <div class="main">
-      <div class="title">Default</div>
-      <div class="todos">
-        <div class="todo">
-          <button class="circle-btn">
-            <img class="circle" src="./images/circle-outline.svg" width="26px" />
-          </button>
-          <div class="title">This is the first todo on the list.</div>
-          <button class="edit-btn">
-            <img class="edit" src="./images/pencil.svg" width="26px" />
-          </button>
-          <button class="delete-btn">
-            <img class="delete" src="./images/close-thick.svg" width="26px" />
-          </button>
-        </div>
-        <div class="todo">
-          <button class="circle-btn">
-            <img class="circle" src="./images/circle-outline.svg" width="26px" />
-          </button>
-          <div class="title">This is the second todo.</div>
-          <button class="edit-btn">
-            <img class="pencil" src="./images/pencil.svg" width="26px" />
-          </button>
-          <button class="delete-btn">
-            <img class="close" src="./images/close-thick.svg" width="26px" />
-          </button>
-        </div>
-      </div>
-    </div>
-  -->
+        <button class="black submit" type="submit">Add Todo</button>
+      </form>
+    </dialog>
   </div>
 </body>
 

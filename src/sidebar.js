@@ -12,6 +12,10 @@ const nametitle = document.createElement("div");
 
 const menu = document.createElement("div");
 const addtodo = document.createElement("button");
+const tododialog = document.querySelector(".todo-dialog");
+const todoclose = document.querySelector(".todo-dialog > button");
+const todoform = document.querySelector(".todo-form");
+
 const addproject = document.createElement("button");
 
 const projects = document.createElement("div");
@@ -41,6 +45,13 @@ const addMenu = (() => {
   addtodo.type = "button";
   addtodo.textContent = "Add Todo";
   menu.appendChild(addtodo);
+  addtodo.addEventListener("click", () => {
+    tododialog.showModal();
+  });
+  todoclose.addEventListener("click", () => {
+    todoform.reset();
+    tododialog.close();
+  });
   addproject.classList.add("add-project");
   addproject.type = "button";
   addproject.textContent = "Add Project";
