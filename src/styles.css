@@ -47,7 +47,8 @@
   margin-bottom: 52px;
 }
 
-.add-todo, .add-project {
+.add-todo,
+.add-project {
   grid-column: 1 / span 2;
   background-color: transparent;
   background-image: url("./images/plus-circle.svg");
@@ -66,7 +67,8 @@
   transition: background-color 0.3s ease;
 }
 
-.add-todo:hover, .add-project:hover {
+.add-todo:hover,
+.add-project:hover {
   background-color: #99ddee;
 }
 
@@ -97,7 +99,6 @@
   display: grid;
   align-items: center;
   grid-template-columns: 1fr 4fr;
-  margin-bottom: 52px;
 }
 
 .project-btn {
@@ -158,7 +159,7 @@ input[type="checkbox"] {
 
 .circle:hover {
   cursor: pointer;
-  filter: brightness(0) saturate(100%) invert(92%) sepia(0%) saturate(1494%) hue-rotate(344deg) brightness(94%) contrast(86%);
+  filter: brightness(0) saturate(100%) invert(66%) sepia(2%) saturate(18%) hue-rotate(314deg) brightness(92%) contrast(90%);
 }
 
 .edit-btn {
@@ -171,7 +172,7 @@ input[type="checkbox"] {
 
 .edit:hover {
   cursor: pointer;
-  filter: brightness(0) saturate(100%) invert(92%) sepia(0%) saturate(1494%) hue-rotate(344deg) brightness(94%) contrast(86%);
+  filter: brightness(0) saturate(100%) invert(66%) sepia(2%) saturate(18%) hue-rotate(314deg) brightness(92%) contrast(90%);
 }
 
 .delete-btn {
@@ -184,7 +185,7 @@ input[type="checkbox"] {
 
 .delete:hover {
   cursor: pointer;
-  filter: brightness(0) saturate(100%) invert(92%) sepia(0%) saturate(1494%) hue-rotate(344deg) brightness(94%) contrast(86%);
+  filter: brightness(0) saturate(100%) invert(66%) sepia(2%) saturate(18%) hue-rotate(314deg) brightness(92%) contrast(90%);
 }
 
 .todo .title {
@@ -194,7 +195,7 @@ input[type="checkbox"] {
   margin: 8px;
 }
 
-.todo-dialog {
+.todo-dialog, .proj-dialog {
   position: fixed;
   top: 25%;
   left: 50%;
@@ -212,7 +213,7 @@ input[type="checkbox"] {
 
 .close:hover {
   cursor: pointer;
-  filter: brightness(0) saturate(100%) invert(92%) sepia(0%) saturate(1494%) hue-rotate(344deg) brightness(94%) contrast(86%);
+  filter: brightness(0) saturate(100%) invert(30%) sepia(21%) saturate(0%) hue-rotate(207deg) brightness(103%) contrast(92%);
 }
 
 form {
@@ -222,6 +223,12 @@ form {
 .todo-input {
   display: grid;
   grid-template-rows: 1fr 2fr 1fr 1fr 0.1fr;
+  row-gap: 30px;
+}
+
+.proj-input {
+  display: grid;
+  grid-template-rows: 1fr 0.1fr;
   row-gap: 30px;
 }
 
@@ -270,7 +277,8 @@ form {
 }
 
 .black:hover {
-  background-color: #333;
+  cursor: pointer;
+  background-color: #555;
 }
 
 .black:active {

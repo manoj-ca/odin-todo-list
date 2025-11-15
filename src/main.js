@@ -55,6 +55,7 @@ const addDelete = ((tododiv) => {
 const addTodo = ((todo) => {
   const tododiv = document.createElement("div");
   tododiv.classList.add("todo");
+  tododiv.id = todo.id;
   todos.appendChild(tododiv);
   addCircle(tododiv);
   const title = document.createElement("div");
@@ -70,7 +71,27 @@ export const mainshow = (() => {
   content.appendChild(main);
   const project = projectmgr.getActive();
   addTitle(project.name);
-  console.log(projectmgr);
+  for (const todo of project.todos) {
+    addTodo(todo);
+  }
+});
+
+export const todoshow = (() => {
+  const project = projectmgr.getActive();
+  const last = project.todos.length - 1;
+  const todo = project.todos[last];
+  addTodo(todo);
+});
+
+export const mainprojshow = ((project) => {
+  let todo = document.querySelector(".todo");
+  while (todo != null) {
+    todos.removeChild(todo);
+    todo = document.querySelector(".todo");
+  }
+  main.removeChild(todos);
+  main.removeChild(title);
+  addTitle(project.name);
   for (const todo of project.todos) {
     addTodo(todo);
   }
