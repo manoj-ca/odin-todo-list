@@ -1,4 +1,5 @@
 import { Todo } from './todo';
+import { todoshow, rmtodo } from "./main";
 import { clearactive } from './sidebar';
 
 export class Project {
@@ -11,6 +12,34 @@ export class Project {
 
   addTodo(todo) {
     this.todos.push(todo);
+    todoshow(this);
+  }
+
+  rmTodo(id) {
+    const index = this.todos.findIndex(todo => todo.id == id);
+    if (index > -1) {
+      this.todos.splice(index, 1);
+      rmtodo(id);
+    }
+  }
+
+  getTodo(id) {
+    const index = this.todos.findIndex(todo => todo.id == id);
+    if (index > -1) {
+      return this.todos[index];
+    } else {
+      return null;
+    }
+  }
+
+  setTodo(id, title, desc, date, prio) {
+    const todo = this.getTodo(id);
+    if (todo != null) {
+      todo.title = title;
+      todo.description = desc;
+      todo.dueDate = date;
+      todo.priority = prio;
+    }
   }
 }
 
@@ -18,10 +47,13 @@ class ProjectMgr {
 
   constructor() {
     const defList = [];
+    const date = new Date();
+    const dateStr = date.toISOString().substring(0, 10);
+
     defList.push(new Todo('This is the first todo on the list.',
-      'description', Date.now(), 2));
+      'Todo description', dateStr, "Moderate"));
     defList.push(new Todo('This is the second todo.',
-      'description', Date.now(), 2));
+      'Todo description', dateStr, "High"));
     this.projects = [];
     this.projects.push(new Project("Default", true, defList));
   }
@@ -41,12 +73,12 @@ class ProjectMgr {
   }
 
   clearActive() {
-    this.projects.forEach(project => {
-      if (project.active) {
-        project.active = false;
-        clearactive(project.id);
-      }
-    });
+    const index = this.projects.findIndex(project => project.active == true);
+    if (index > -1) {
+      const project = this.projects[index];
+      project.active = false;
+      clearactive(project.id);
+    }
   }
 
 }

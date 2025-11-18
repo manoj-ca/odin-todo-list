@@ -2,8 +2,7 @@ import closeImg from "./images/close-thick.svg";
 import { Todo } from './todo';
 import { Project } from './project';
 import { projectmgr } from "./project";
-import { todoshow } from "./main";
-import { mainprojshow } from "./main";
+import { mainprojshow, settodo } from "./main";
 import { projectshow } from "./sidebar";
 
 const addPriority = ((todoinput) => {
@@ -109,10 +108,16 @@ const addForm = ((tododialog) => {
     const desc = formData.get('description');
     const date = formData.get('date');
     const prio = formData.get('priority');
-    const todo = new Todo(title, desc, date, prio);
     const project = projectmgr.getActive();
-    project.addTodo(todo);
-    todoshow();
+    if (event.submitter.textContent.includes("Add")) {
+      const todo = new Todo(title, desc, date, prio);
+      project.addTodo(todo);
+    } else {
+      const id = event.submitter.id;
+      project.setTodo(id, title, desc, date, prio);
+      const todo = project.getTodo(id);
+      settodo(todo);
+    }
     todoform.reset();
     tododialog.close();
   });

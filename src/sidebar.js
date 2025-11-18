@@ -37,6 +37,8 @@ const addMenu = ((sidebar) => {
   addtodo.textContent = "Add Todo";
   menu.appendChild(addtodo);
   addtodo.addEventListener("click", () => {
+    const submit = document.querySelector(".todo-form .submit");
+    submit.textContent = "Add Todo";
     tododialog.showModal();
   });
   todoclose.addEventListener("click", () => {
