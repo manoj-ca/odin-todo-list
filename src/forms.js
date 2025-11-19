@@ -1,6 +1,5 @@
 import closeImg from "./images/close-thick.svg";
-import { Todo } from './todo';
-import { Project } from './project';
+import { Project, Todo } from './project';
 import { projectmgr } from "./project";
 import { mainprojshow, settodo } from "./main";
 import { projectshow } from "./sidebar";
@@ -118,6 +117,7 @@ const addForm = ((tododialog) => {
       const todo = project.getTodo(id);
       settodo(todo);
     }
+    projectmgr.save();
     todoform.reset();
     tododialog.close();
   });
@@ -179,10 +179,18 @@ const addProjForm = ((projdialog) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const name = formData.get('name');
-    projectmgr.clearActive();
-    const project = new Project(name, true, []);
-    projectmgr.addProject(project);
-    projectshow();
+    let project;
+    const add = event.submitter.textContent.includes("Add");
+    if (add) {
+      projectmgr.clearActive();
+      project = new Project(name, true, []);
+      projectmgr.addProject(project);
+    } else {
+      project = projectmgr.getActive();
+      project.name = name;
+    }
+    projectmgr.save();
+    projectshow(add, project);
     mainprojshow(project);
     projform.reset();
     projdialog.close();

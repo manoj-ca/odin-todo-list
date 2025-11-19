@@ -1,6 +1,16 @@
-import { Todo } from './todo';
-import { todoshow, rmtodo } from "./main";
-import { clearactive } from './sidebar';
+import { todoshow, rmtodo, setdone } from "./main";
+import { clearactive, rmproj } from './sidebar';
+
+export class Todo {
+  constructor(title, description, dueDate, priority) {
+    this.title = title;
+    this.description = description;
+    this.dueDate = dueDate;
+    this.priority = priority;
+    this.id = crypto.randomUUID();
+    this.done = false;
+  }
+}
 
 export class Project {
   constructor(name, active, todos) {
@@ -48,12 +58,19 @@ class ProjectMgr {
   constructor() {
     const defList = [];
     const date = new Date();
-    const dateStr = date.toISOString().substring(0, 10);
+    date.setDate(date.getDate() + 1);
+    const dateStrH = date.toISOString().substring(0, 10);
+    date.setDate(date.getDate() + 5);
+    const dateStrM = date.toISOString().substring(0, 10);
+    date.setDate(date.getDate() + 10);
+    const dateStrL = date.toISOString().substring(0, 10);
 
-    defList.push(new Todo('This is the first todo on the list.',
-      'Todo description', dateStr, "Moderate"));
-    defList.push(new Todo('This is the second todo.',
-      'Todo description', dateStr, "High"));
+    defList.push(new Todo('This is the first todo with High priority.',
+      'Todo description', dateStrH, "High"));
+    defList.push(new Todo('This second todo has Moderate priority.',
+      'Todo description', dateStrM, "Moderate"));
+    defList.push(new Todo('This is the third todo with Low priority.',
+      'Todo description', dateStrL, "Low"));
     this.projects = [];
     this.projects.push(new Project("Default", true, defList));
   }
@@ -67,6 +84,14 @@ class ProjectMgr {
     return projectFound;
   }
 
+  rmProject(id) {
+    const index = this.projects.findIndex(project => project.id == id);
+    if (index > -1) {
+      this.projects.splice(index, 1);
+      rmproj(id);
+    }
+  }
+
   getActive() {
     const projectFound = this.projects.find(project => project.active == true);
     return projectFound;
@@ -78,6 +103,24 @@ class ProjectMgr {
       const project = this.projects[index];
       project.active = false;
       clearactive(project.id);
+    }
+  }
+
+  save() {
+    localStorage.setItem('projects', JSON.stringify(this.projects));
+  }
+
+  load() {
+    const storedData = localStorage.getItem('projects');
+    if (storedData) {
+      const projects = JSON.parse(storedData);
+      this.projects = [];
+      projects.forEach(project => {
+        const proj = new Project(project.name, project.active, project.todos);
+        this.addProject(proj);
+      });
+    } else {
+      console.log('Projects not found in local storage');
     }
   }
 

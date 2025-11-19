@@ -9,12 +9,55 @@ const main = document.createElement("div");
 const title = document.createElement("div");
 const todos = document.createElement("div");
 
-const addTitle = ((name) => {
+const addProjDelete = ((title, project) => {
+  const deletebtn = document.createElement("button");
+  deletebtn.classList.add("proj-delete-btn");
+  deletebtn.type = "button";
+  title.appendChild(deletebtn);
+  const deleteimg = document.createElement("img");
+  deleteimg.classList.add("delete");
+  deleteimg.src = deleteImg;
+  deleteimg.width = 26;
+  deletebtn.appendChild(deleteimg);
+
+  deletebtn.addEventListener('click', () => {
+    projectmgr.rmProject(project.id);
+    projectmgr.projects[0].active = true;
+  });
+});
+
+const addProjEdit = ((title, project) => {
+  const editbtn = document.createElement("button");
+  editbtn.classList.add("proj-edit-btn");
+  editbtn.type = "button";
+  title.appendChild(editbtn);
+  const editimg = document.createElement("img");
+  editimg.classList.add("edit");
+  editimg.src = editImg;
+  editimg.width = 26;
+  editbtn.appendChild(editimg);
+  editbtn.addEventListener("click", () => {
+    const title = document.querySelector(".proj-input .input:first-child .text");
+    title.value = project.name;
+    const submit = document.querySelector(".proj-form .submit");
+    submit.id = project.id;
+    submit.type = "submit";
+    submit.textContent = "Save Project";
+    const projdialog = document.querySelector(".proj-dialog");
+    projdialog.showModal();
+  });
+});
+
+const addTitle = ((project) => {
   title.classList.add("title");
-  title.textContent = name;
+  title.textContent = project.name;
   main.appendChild(title);
   todos.classList.add("todos");
   main.appendChild(todos);
+  if (project.name != "Default") {
+    addProjEdit(title, project);
+    addProjDelete(title, project);
+  }
 });
 
 const addCircle = ((tododiv, todo) => {
@@ -26,11 +69,15 @@ const addCircle = ((tododiv, todo) => {
   circleimg.classList.add("circle");
   circleimg.src = circleImg;
   circleimg.width = 26;
-  circlebtn.appendChild(circleimg);
   const doneimg = document.createElement("img");
   doneimg.classList.add("circle");
   doneimg.src = doneImg;
   doneimg.width = 26;
+  if (todo.done) {
+    circlebtn.appendChild(doneimg);
+  } else {
+    circlebtn.appendChild(circleimg);
+  }
 
   circlebtn.addEventListener('click', () => {
     if (todo.done) {
@@ -88,7 +135,6 @@ const addDelete = ((tododiv, project) => {
   deletebtn.addEventListener('click', () => {
     project.rmTodo(tododiv.id);
   });
-
 });
 
 const addTodo = ((todo, project) => {
@@ -108,6 +154,7 @@ const addTodo = ((todo, project) => {
     title.style.color = "#000000";
   }
   tododiv.appendChild(title);
+  setdone(todo.id, todo.done);
   addEdit(tododiv, todo);
   addDelete(tododiv, project);
 });
@@ -129,7 +176,7 @@ export const mainshow = (() => {
   main.classList.add("main");
   content.appendChild(main);
   const project = projectmgr.getActive();
-  addTitle(project.name);
+  addTitle(project);
   for (const todo of project.todos) {
     addTodo(todo, project);
   }
@@ -149,7 +196,7 @@ export const mainprojshow = ((project) => {
   }
   main.removeChild(todos);
   main.removeChild(title);
-  addTitle(project.name);
+  addTitle(project);
   for (const todo of project.todos) {
     addTodo(todo, project);
   }

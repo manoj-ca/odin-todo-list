@@ -12,7 +12,7 @@
 
 .sidebar {
   grid-column: 1;
-  height: 100vh;
+  height: max(100vh, 100%);
   background-color: #aaeeff;
 }
 
@@ -132,6 +132,21 @@
   font-weight: 900;
   color: black;
   margin: 18px;
+}
+
+.proj-edit-btn {
+  width: min-content;
+  background-color: transparent;
+  border: none;
+  margin-top: 8px;
+  margin-left: 50px;
+}
+
+.proj-delete-btn {
+  width: min-content;
+  background-color: transparent;
+  border: none;
+  margin-top: 8px;
 }
 
 input[type="checkbox"] {

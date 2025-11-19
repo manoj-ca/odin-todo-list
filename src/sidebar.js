@@ -103,6 +103,7 @@ const addProject = ((sidebar, currproject) => {
       projectmgr.clearActive();
       currproject.active = true;
       projectbtn.style.backgroundColor = '#99ff99';
+      projectmgr.save();
       mainprojshow(currproject);
     }
   });
@@ -121,15 +122,34 @@ export const sidebarshow = (() => {
   });
 });
 
-export const projectshow = (() => {
-  const sidebar = document.querySelector(".sidebar");
-  const last = projectmgr.projects.length - 1;
-  const project = projectmgr.projects[last];
-  addProject(sidebar, project);
+export const projectshow = ((add, project) => {
+  if (add) {
+    const sidebar = document.querySelector(".sidebar");
+    const last = projectmgr.projects.length - 1;
+    const project = projectmgr.projects[last];
+    addProject(sidebar, project);
+  } else {
+    const projid = "#" + CSS.escape(project.id) + " > " + "button";
+    const projectbtn = document.querySelector(projid);
+    projectbtn.textContent = project.name;
+  }
 });
 
 export const clearactive = ((id) => {
   const projid = "#" + CSS.escape(id) + " > " + "button";
   const projectbtn = document.querySelector(projid);
   projectbtn.style.backgroundColor = 'transparent';
+});
+
+export const rmproj = ((id) => {
+  const sidebar = document.querySelector(".sidebar");
+  const projid = "#" + CSS.escape(id);
+  const projdiv = document.querySelector(projid);
+  sidebar.removeChild(projdiv);
+  const defproj = projectmgr.projects[0];
+  const defid = "#" + CSS.escape(defproj.id) + " > " + "button";
+  const defbtn = document.querySelector(defid);
+  defproj.active = true;
+  defbtn.style.backgroundColor = '#99ff99';
+  mainprojshow(defproj);
 });
